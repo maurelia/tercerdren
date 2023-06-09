@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1400px;
+            height: 845px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/DRENES_1.js"></script>
+        <script src="data/1_ETAPA_DREN_2.js"></script>
+        <script src="data/2_ETAPA_DREN_3.js"></script>
+        <script src="data/3_ETAPA_DREN_4.js"></script>
+        <script src="data/puntos_dren_5.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-27.385644354326498,-70.26430472684041],[-27.38233330924921,-70.25821821296945]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&hl=en', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 22
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_DRENES_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Etapa'] !== null ? autolinker.link(feature.properties['Etapa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LARGO'] !== null ? autolinker.link(feature.properties['LARGO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DRENES_1_0(feature) {
+            switch(String(feature.properties['Etapa'])) {
+                case 'CONSTRUIDO':
+                    return {
+                pane: 'pane_DRENES_1',
+                opacity: 1,
+                color: 'rgba(35,35,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'EN PROCESO':
+                    return {
+                pane: 'pane_DRENES_1',
+                opacity: 1,
+                color: 'rgba(0,214,45,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_DRENES_1',
+                opacity: 1,
+                color: 'rgba(138,208,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_DRENES_1');
+        map.getPane('pane_DRENES_1').style.zIndex = 401;
+        map.getPane('pane_DRENES_1').style['mix-blend-mode'] = 'normal';
+        var layer_DRENES_1 = new L.geoJson(json_DRENES_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DRENES_1',
+            layerName: 'layer_DRENES_1',
+            pane: 'pane_DRENES_1',
+            onEachFeature: pop_DRENES_1,
+            style: style_DRENES_1_0,
+        });
+        bounds_group.addLayer(layer_DRENES_1);
+        map.addLayer(layer_DRENES_1);
+        function pop_1_ETAPA_DREN_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ETAPA'] !== null ? autolinker.link(feature.properties['ETAPA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_1_ETAPA_DREN_2_0() {
+            return {
+                pane: 'pane_1_ETAPA_DREN_2',
+                opacity: 1,
+                color: 'rgba(255,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_1_ETAPA_DREN_2');
+        map.getPane('pane_1_ETAPA_DREN_2').style.zIndex = 402;
+        map.getPane('pane_1_ETAPA_DREN_2').style['mix-blend-mode'] = 'normal';
+        var layer_1_ETAPA_DREN_2 = new L.geoJson(json_1_ETAPA_DREN_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_1_ETAPA_DREN_2',
+            layerName: 'layer_1_ETAPA_DREN_2',
+            pane: 'pane_1_ETAPA_DREN_2',
+            onEachFeature: pop_1_ETAPA_DREN_2,
+            style: style_1_ETAPA_DREN_2_0,
+        });
+        bounds_group.addLayer(layer_1_ETAPA_DREN_2);
+        map.addLayer(layer_1_ETAPA_DREN_2);
+        function pop_2_ETAPA_DREN_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ETAPA'] !== null ? autolinker.link(feature.properties['ETAPA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2_ETAPA_DREN_3_0() {
+            return {
+                pane: 'pane_2_ETAPA_DREN_3',
+                opacity: 1,
+                color: 'rgba(255,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_2_ETAPA_DREN_3');
+        map.getPane('pane_2_ETAPA_DREN_3').style.zIndex = 403;
+        map.getPane('pane_2_ETAPA_DREN_3').style['mix-blend-mode'] = 'normal';
+        var layer_2_ETAPA_DREN_3 = new L.geoJson(json_2_ETAPA_DREN_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2_ETAPA_DREN_3',
+            layerName: 'layer_2_ETAPA_DREN_3',
+            pane: 'pane_2_ETAPA_DREN_3',
+            onEachFeature: pop_2_ETAPA_DREN_3,
+            style: style_2_ETAPA_DREN_3_0,
+        });
+        bounds_group.addLayer(layer_2_ETAPA_DREN_3);
+        map.addLayer(layer_2_ETAPA_DREN_3);
+        function pop_3_ETAPA_DREN_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ETAPA'] !== null ? autolinker.link(feature.properties['ETAPA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_3_ETAPA_DREN_4_0() {
+            return {
+                pane: 'pane_3_ETAPA_DREN_4',
+                opacity: 1,
+                color: 'rgba(255,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_3_ETAPA_DREN_4');
+        map.getPane('pane_3_ETAPA_DREN_4').style.zIndex = 404;
+        map.getPane('pane_3_ETAPA_DREN_4').style['mix-blend-mode'] = 'normal';
+        var layer_3_ETAPA_DREN_4 = new L.geoJson(json_3_ETAPA_DREN_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_3_ETAPA_DREN_4',
+            layerName: 'layer_3_ETAPA_DREN_4',
+            pane: 'pane_3_ETAPA_DREN_4',
+            onEachFeature: pop_3_ETAPA_DREN_4,
+            style: style_3_ETAPA_DREN_4_0,
+        });
+        bounds_group.addLayer(layer_3_ETAPA_DREN_4);
+        map.addLayer(layer_3_ETAPA_DREN_4);
+        function pop_puntos_dren_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VERTICE'] !== null ? autolinker.link(feature.properties['VERTICE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTE'] !== null ? autolinker.link(feature.properties['ESTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NORTE'] !== null ? autolinker.link(feature.properties['NORTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_puntos_dren_5_0() {
+            return {
+                pane: 'pane_puntos_dren_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,60,57,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_puntos_dren_5');
+        map.getPane('pane_puntos_dren_5').style.zIndex = 405;
+        map.getPane('pane_puntos_dren_5').style['mix-blend-mode'] = 'normal';
+        var layer_puntos_dren_5 = new L.geoJson(json_puntos_dren_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_puntos_dren_5',
+            layerName: 'layer_puntos_dren_5',
+            pane: 'pane_puntos_dren_5',
+            onEachFeature: pop_puntos_dren_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_puntos_dren_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_puntos_dren_5);
+        map.addLayer(layer_puntos_dren_5);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/puntos_dren_5.png" /> puntos_dren': layer_puntos_dren_5,'<img src="legend/3_ETAPA_DREN_4.png" /> 3_ETAPA_DREN': layer_3_ETAPA_DREN_4,'<img src="legend/2_ETAPA_DREN_3.png" /> 2_ETAPA_DREN': layer_2_ETAPA_DREN_3,'<img src="legend/1_ETAPA_DREN_2.png" /> 1_ETAPA_DREN': layer_1_ETAPA_DREN_2,'DRENES<br /><table><tr><td style="text-align: center;"><img src="legend/DRENES_1_CONSTRUIDO0.png" /></td><td>CONSTRUIDO</td></tr><tr><td style="text-align: center;"><img src="legend/DRENES_1_ENPROCESO1.png" /></td><td>EN PROCESO</td></tr><tr><td style="text-align: center;"><img src="legend/DRENES_1_2.png" /></td><td></td></tr></table>': layer_DRENES_1,"Google Hybrid": layer_GoogleHybrid_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_DRENES_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['TIPO'] !== null?String('<div style="color: #323232; font-size: 10pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + layer.feature.properties['TIPO']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_DRENES_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_1_ETAPA_DREN_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((exp_label_1_ETAPA_DREN_2_eval_expression(context) !== null?String('<div style="color: #323232; font-size: 15pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + exp_label_1_ETAPA_DREN_2_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_1_ETAPA_DREN_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_2_ETAPA_DREN_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((exp_label_2_ETAPA_DREN_3_eval_expression(context) !== null?String('<div style="color: #323232; font-size: 15pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + exp_label_2_ETAPA_DREN_3_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2_ETAPA_DREN_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_3_ETAPA_DREN_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((exp_label_3_ETAPA_DREN_4_eval_expression(context) !== null?String('<div style="color: #323232; font-size: 15pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + exp_label_3_ETAPA_DREN_4_eval_expression(context)) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_3_ETAPA_DREN_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_puntos_dren_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['VERTICE'] !== null?String('<div style="color: #ff3232; font-size: 10pt; font-weight: bold; font-family: \'Calibri\', sans-serif;">' + layer.feature.properties['VERTICE']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_puntos_dren_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_DRENES_1,layer_1_ETAPA_DREN_2,layer_2_ETAPA_DREN_3,layer_3_ETAPA_DREN_4,layer_puntos_dren_5]);
+        map.on("zoomend", function(){
+            resetLabels([layer_DRENES_1,layer_1_ETAPA_DREN_2,layer_2_ETAPA_DREN_3,layer_3_ETAPA_DREN_4,layer_puntos_dren_5]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_DRENES_1,layer_1_ETAPA_DREN_2,layer_2_ETAPA_DREN_3,layer_3_ETAPA_DREN_4,layer_puntos_dren_5]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_DRENES_1,layer_1_ETAPA_DREN_2,layer_2_ETAPA_DREN_3,layer_3_ETAPA_DREN_4,layer_puntos_dren_5]);
+        });
+        </script>
+    </body>
+</html>
